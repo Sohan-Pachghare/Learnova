@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const { auth } = require("../middleware");
 
 router.post('/signup', async (req, res) => {
     const { name, email, password } = req.body;
@@ -47,7 +48,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/purchase', async (req, res) => {
+router.post('/purchase', auth, async (req, res) => {
     const {courseName, } = req.body;
 
 });

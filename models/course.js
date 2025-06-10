@@ -12,23 +12,20 @@ const courseSchema = new mongoose.Schema({
     required: [true, 'Course description is required'],
     trim: true
   },
-  instructor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: [true, 'Course instructor is required']
-  },
   price: {
     type: Number,
-    default: 0
+    default: 0,
+    min: [0, 'Price cannot be negative']
   },
-  enrolledStudents: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
   thumbnail: {
     type: String,
     default: 'thumbnail.jpg'
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Course owner is required']
+  }
 }, {
   timestamps: true,
   toJSON: { virtuals: true },
