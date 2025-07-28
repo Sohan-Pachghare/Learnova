@@ -21,7 +21,6 @@ const adminAuth = async (req, res, next) => {
         const admin = await User.findById(decodedToken.id);
         if(admin && admin.role === "admin") {
             req.userId = decodedToken.id;
-            console.log("Admin authenticated");
             next();
         } else {
             res.send("Access denied! You are not an admin.");
